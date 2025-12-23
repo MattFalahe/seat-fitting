@@ -216,17 +216,17 @@ class FittingController extends Controller implements CalculateConstants
     {
         $fit = Fitting::find($id);
         $provider = setting('cryptatech_seat_fitting_price_provider', true);
-        
+
         // Check if price provider is configured
         if ($provider === null) {
             return response()->json([
                 'error' => 'Price provider not configured. Please configure it in Fitting Settings.',
                 'total' => 0,
                 'ship' => 0,
-                'volume' => 0
+                'volume' => 0,
             ], 400);
         }
-        
+
         $items = $fit->fitItems;
         $ship = new FittingItem;
         $ship->type_id = $fit->ship_type_id;
